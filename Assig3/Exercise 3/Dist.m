@@ -1,0 +1,11 @@
+function [inliers, H]= Dist(H,x,t)
+    x1 = x(1:3,:); 
+    x2 = x(4:6,:);       
+    Hx1    = H*x1;
+    invHx2 = H\x2;
+    x1     = Normalise(x1);
+    x2     = Normalise(x2);     
+    Hx1    = Normalise(Hx1);
+    invHx2 = Normalise(invHx2); 
+    d2 = sum((x1-invHx2).^2)  + sum((x2-Hx1).^2);
+    inliers = find(abs(d2)<t);    

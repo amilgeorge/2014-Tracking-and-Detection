@@ -1,0 +1,25 @@
+A = imread('image2.jpg'); 
+greyimage = rgb2gray(A);
+
+G1f=gaussian(1);
+tic;
+gaussianResult1=convolution(greyimage,G1f);
+gaussian2DtimeElapsed= toc;
+
+[G1fx,G1fy]=hvgaussianfilters(1);
+tic;
+h1=convolution(greyimage,G1fx);
+h2=convolution(h1,G1fy);
+gaussian1DtimeElapsed= toc;
+
+figure;
+subplot(1,2,1)
+imshow(gaussianResult1);
+title('2D Gaussian')
+subplot(1,2,2)
+imshow(h2);
+title('1D Gaussian')
+gaussian2DTimeElapsed=['Time elapsed',num2str(time1)];
+
+disp('gaussian2DTime - '+gaussian2DtimeElapsed);
+disp('gaussian1DTime - '+gaussian1DtimeElapsed);
